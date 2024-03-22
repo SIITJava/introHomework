@@ -21,14 +21,17 @@ jobs:
 
       - name: Build with Maven
         run: mvn -B clean install
+        continue-on-error: true
 
       - name: Run tests and capture result
         id: test
+        if: always()
         run: |
           TEST_RESULT=$(mvn test)
           echo "::set-output name=test_result::$TEST_RESULT"
 
       - name: Calculate grade
+        if: always()
         run: |
           test_result="${{ steps.test.outputs.test_result }}"
           # Count the number of test failures
@@ -43,5 +46,6 @@ jobs:
           echo "::set-output name=grade::$grade"
 
       - name: Display grade
+        if: always()
         run: |
           echo "Test grade: ${{ steps.calculate_grade.outputs.grade }}"
