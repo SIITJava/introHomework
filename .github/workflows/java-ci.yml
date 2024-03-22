@@ -28,7 +28,8 @@ jobs:
         if: always()
         run: |
           TEST_RESULT=$(mvn test)
-          echo "::set-output name=test_result::$TEST_RESULT"
+          echo $TEST_RESULT
+          echo "{test_result}={$TEST_RESULT}" >> $GITHUB_OUTPUT
 
       - name: Calculate grade
         if: always()
@@ -43,7 +44,7 @@ jobs:
           elif ((grade > 10)); then
             grade=10
           fi
-          echo "::set-output name=grade::$grade"
+          echo "{grade}={$grade}" >> $GITHUB_OUTPUT
 
       - name: Display grade
         if: always()
