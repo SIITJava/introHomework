@@ -13,14 +13,35 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up JDK
+      - name: Set up JDK 11
         uses: actions/setup-java@v2
         with:
-          java-version: '11'
+          java-version: 11
           distribution: 'adopt'
 
       - name: Build with Maven
         run: mvn -B clean install
 
-      - name: Run tests
-        run: mvn -B test
+      - name: Run tests and capture result
+        id: test
+        run: |
+          TEST_RESULT=$(mvn test)
+          echo "::set-output name=test_result::$TEST_RESULT"
+
+      - name: Calculate grade
+        run: |
+          test_result="${{ steps.test.outputs.test_result }}"
+          # Count the number of test failures
+          num_failures=$(echo "$test_result" | grep -Eo 'Tests run: [0-9]+, Failures: [1-9][0-9]*' | grep -Eo '[1-9][0-9]*' || echo 0)
+          # Calculate the grade
+          grade=$((10 - num_failures))
+          if ((grade < 1)); then
+            grade=1
+          elif ((grade > 10)); then
+            grade=10
+          fi
+          echo "::set-output name=grade::$grade"
+
+      - name: Display grade
+        run: |
+          echo "Test grade: ${{ steps.calculate_grade.outputs.grade }}"
