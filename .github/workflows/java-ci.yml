@@ -23,4 +23,24 @@ jobs:
         run: mvn -B clean install
 
       - name: Run tests
-        run: mvn -B test
+        id: test
+        run: |
+          TEST_RESULT=$(mvn test)
+          TEST_COUNT=$(echo "$TEST_RESULT" | grep -oP "(?<=Tests run: )\d+")
+          PASS_COUNT=$(echo "$TEST_RESULT" | grep -oP "(?<=Failures: 0, Errors: 0, )\d+")
+          echo "::set-output name=passed_tests::$PASS_COUNT"
+          echo "::set-output name=total_tests::$TEST_COUNT"
+
+      - name: Provide Feedback
+        if: always()
+        run: |
+          PASSED_TESTS=$(echo "${{ steps.test.outputs.passed_tests }}")
+          TOTAL_TESTS=$(echo "${{ steps.test.outputs.total_tests }}")
+          PASS_THRESHOLD=80
+          PASS_PERCENT=$(( PASSED_TESTS * 100 / TOTAL_TESTS ))
+          echo "Passed ${PASSED_TESTS}/${TOTAL_TESTS} tests (${PASS_PERCENT}%)."
+          if [ $PASS_PERCENT -ge $PASS_THRESHOLD ]; then
+            echo "Tests passed threshold. Code changes are acceptable."
+          else
+            echo "Tests did not meet threshold. Please improve your code."
+          fi
