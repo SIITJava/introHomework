@@ -19,14 +19,10 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
 
-      - name: Build with Maven
-        run: mvn -B clean install
-        continue-on-error: true
-
       - name: Run tests
         id: test
         run: |
-          TEST_RESULT=$(mvn test)
+          TEST_RESULT=$(mvn -B clean install)
           TEST_COUNT=$(echo "$TEST_RESULT" | grep -oP "(?<=Tests run: )\d+")
           PASS_COUNT=$(echo "$TEST_RESULT" | grep -oP "(?<=Failures: 0, Errors: 0, )\d+")
           echo "::set-output name=passed_tests::$PASS_COUNT"
