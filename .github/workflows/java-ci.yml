@@ -26,10 +26,7 @@ jobs:
       - name: Run tests and capture result
         id: test
         if: always()
-        run: |
-          TEST_RESULT=$(mvn test)
-          echo $TEST_RESULT
-          echo "{test_result}={$TEST_RESULT}" >> $GITHUB_OUTPUT
+        run: TEST_RESULT=$(mvn test) && echo $TEST_RESULT && echo "{test_result}={$TEST_RESULT}" >> $GITHUB_OUTPUT
 
       - name: Calculate grade
         if: always()
