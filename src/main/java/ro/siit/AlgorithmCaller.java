@@ -8,7 +8,6 @@ public class AlgorithmCaller {
     // 1. Calculate the sum of the first 100 numbers higher than 0
     public int sumOfFirst100Numbers() {
         // Your implementation here
-
             int sum = 0;
             for (int i=1; i<=100; i++){
                 sum+=i;
@@ -23,7 +22,6 @@ public class AlgorithmCaller {
             for (int element:numbers){
                 if(element<smallestNumber) smallestNumber=element;
             }
-            //System.out.println(smallestNumber);
             return smallestNumber;
     }
 
@@ -35,11 +33,10 @@ public class AlgorithmCaller {
             //System.out.println(Arrays.toString(digitsArray));
             //System.out.println(findMaxNumber(digitsArray));
             return findMaxNumber(digitsArray);
-
         }
 
 
-    public static int findMaxNumber(int [] array){
+    public int findMaxNumber(int [] array){
         int maxNumber= array[0];
         for (int element:array){
             if(element>maxNumber)maxNumber=element;
@@ -48,7 +45,7 @@ public class AlgorithmCaller {
         return maxNumber;
     }
 
-    public static int[] createDigitsArray(int number) {
+    public int[] createDigitsArray(int number) {
         int length = ("" + number).length();
         int[] digitsArray = new int[length];
         //System.out.println(Arrays.toString(digitsArray));
@@ -95,7 +92,7 @@ public class AlgorithmCaller {
         return primeNumbers;
     }
 
-    public static boolean isPrime (int number){
+    public boolean isPrime (int number){
         if(number<2) return false;
         boolean test= true;
         for(int i=2; i<=number/2; i++){
