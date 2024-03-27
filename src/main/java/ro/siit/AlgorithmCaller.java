@@ -28,8 +28,19 @@
     
         // 3. Display the max digit of a number
         public int findMaxDigit(int number) {
-            // Your implementation here
-            return 0; // Placeholder return value
+            String numberToString = Integer.toString(number);
+            
+            int maxDigit = Character.getNumericValue(numberToString.charAt(0));
+            
+            for (int i = 1; i < numberToString.length(); i++) {
+                int digit = Character.getNumericValue(numberToString.charAt(i));
+                
+                if (digit > maxDigit) {
+                    maxDigit = digit;
+                }
+            }
+            
+            return maxDigit;
         }
     
         // 4. Check if a number is palindrome
@@ -37,17 +48,13 @@
             String numberToString = Integer.toString(number);
             
             String reversedNumber = new StringBuilder(numberToString).reverse().toString();
-            
-            boolean isEqual = numberToString.equals(reversedNumber);
-            
-            System.out.println(isEqual);
-            return isEqual;
+	        
+	        return numberToString.equals(reversedNumber);
         }
     
         // 5. Display all the prime numbers lower than a given number
         public List<Integer> findPrimes(int limit) {
-            // Your implementation here
-            return new ArrayList<>(); // Placeholder return value
+            return new ArrayList<>();
         }
     }
     
