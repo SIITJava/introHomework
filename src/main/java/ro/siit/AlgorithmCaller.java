@@ -27,8 +27,6 @@ public class AlgorithmCaller {
         // Your implementation here
             if(number<0) number*=-1;
             int[] digitsArray= createDigitsArray(number);
-            //System.out.println(Arrays.toString(digitsArray));
-            //System.out.println(findMaxNumber(digitsArray));
             return findMaxNumber(digitsArray);
         }
 
@@ -38,14 +36,12 @@ public class AlgorithmCaller {
         for (int element:array){
             if(element>maxNumber)maxNumber=element;
         }
-        //System.out.println(maxNumber);
-        return maxNumber;
+         return maxNumber;
     }
 
     public int[] createDigitsArray(int number) {
         int length = ("" + number).length();
         int[] digitsArray = new int[length];
-        //System.out.println(Arrays.toString(digitsArray));
         for (int i = length - 1; i >= 0; i--) {
             digitsArray[i] = number % 10;
             number -= digitsArray[i];
@@ -60,20 +56,14 @@ public class AlgorithmCaller {
             if(number<0) {
                 return false;
             }
-
             int[] digitsArray= createDigitsArray(number);
-            //System.out.println(Arrays.toString(digitsArray));
-
             boolean test=true;
             for(int i=0; i<= (digitsArray.length/2)-1; i++){
-                //System.out.println(digitsArray[i]);
-                //System.out.println(digitsArray[digitsArray.length-1-i]);
                 if(digitsArray[i] != digitsArray[digitsArray.length-1-i]) {
                     test= false;
                     break;
                 }
             }
-            //System.out.println(test);
             return test;
         }
 
