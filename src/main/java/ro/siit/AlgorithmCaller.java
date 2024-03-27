@@ -1,7 +1,6 @@
     package ro.siit;
     
     import java.util.ArrayList;
-    import java.util.List;
     
     public class AlgorithmCaller {
     
@@ -46,15 +45,20 @@
         // 4. Check if a number is palindrome
         public boolean isPalindrome(int number) {
             String numberToString = Integer.toString(number);
-            
             String reversedNumber = new StringBuilder(numberToString).reverse().toString();
 	        
-	        return numberToString.equals(reversedNumber);
+            return numberToString.equals(reversedNumber);
         }
     
         // 5. Display all the prime numbers lower than a given number
-        public List<Integer> findPrimes(int limit) {
-            return new ArrayList<>();
+        public boolean findPrimes(int limit) {
+            if (limit < 0) {
+                return false;
+            }
+            
+            for (int i = 2; i <= limit; i++) {
+	            return limit % i != 0;
+            }
         }
     }
     
