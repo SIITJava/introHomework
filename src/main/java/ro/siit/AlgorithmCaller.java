@@ -7,8 +7,11 @@ public class AlgorithmCaller {
 
     // 1. Calculate the sum of the first 100 numbers higher than 0
     public int sumOfFirst100Numbers() {
-        // Your implementation here
-        return 0; // Placeholder return value
+        int sum = 0;
+        for (int i = 1; i < 101; i++ ) {
+            sum += i;
+        }
+        return sum;
     }
 
     // 2. Display the smallest number from an array of numbers
