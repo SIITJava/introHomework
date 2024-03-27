@@ -34,8 +34,14 @@
     
         // 4. Check if a number is palindrome
         public boolean isPalindrome(int number) {
-            // Your implementation here
-            return false; // Placeholder return value
+            String numberToString = Integer.toString(number);
+            
+            String reversedNumber = new StringBuilder(numberToString).reverse().toString();
+            
+            boolean isEqual = numberToString.equals(reversedNumber);
+            
+            System.out.println(isEqual);
+            return isEqual;
         }
     
         // 5. Display all the prime numbers lower than a given number
