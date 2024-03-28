@@ -1,15 +1,12 @@
 package ro.siit;
 
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
 
-import org.junit.Test;
-import static org.junit.Assert.*;
 import java.util.List;
 
-public class AlgorithmCallerTest {
+import static org.junit.Assert.*;
 
+public class AlgorithmCallerTest {
     @Test
     public void testSumOfFirst100Numbers() {
         AlgorithmCaller caller = new AlgorithmCaller();
